@@ -6,8 +6,11 @@ public class TestDAO {
 
 	public static void main(String[] args) {
 		EventsDAO dao = new EventsDAO();
-		for(Event e : dao.listAllEvents())
-			System.out.println(e);
+		//for(Event e : dao.listAllEvents())
+			//System.out.println(e);
+		System.out.println(dao.listAllCategories());
+		System.out.println(dao.listAllYears());
 	}
+	
 
 }

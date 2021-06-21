@@ -23,10 +23,10 @@ public class FXMLController {
     private URL location;
 
     @FXML
-    private ComboBox<?> boxCategoria;
+    private ComboBox<String> boxCategoria;
 
     @FXML
-    private ComboBox<?> boxAnno;
+    private ComboBox<Integer> boxAnno;
 
     @FXML
     private Button btnAnalisi;
@@ -63,5 +63,7 @@ public class FXMLController {
 
 	public void setModel(Model model) {
 		this.model = model;
+		boxCategoria.getItems().addAll(model.getAllCategories());
+		boxAnno.getItems().addAll(model.getAllYears());
 	}
 }

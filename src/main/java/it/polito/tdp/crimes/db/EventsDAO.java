@@ -55,4 +55,69 @@ public class EventsDAO {
 		}
 	}
 
+	public List<String> listAllCategories(){
+		String sql = "SELECT DISTINCT offense_category_id "
+				+ "FROM events " ;
+		try {
+			Connection conn = DBConnect.getConnection() ;
+
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			List<String> list = new ArrayList<>() ;
+			
+			ResultSet res = st.executeQuery() ;
+			
+			while(res.next()) {
+				try {
+					list.add(res.getString("offense_category_id"));
+				} catch (Throwable t) {
+					t.printStackTrace();
+					
+				}
+			}
+			
+			conn.close();
+			return list ;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null ;
+		}
+	}
+	
+	public List<Integer> listAllYears(){
+		String sql = "SELECT DISTINCT reported_date "
+				+ "FROM events ";
+		try {
+			Connection conn = DBConnect.getConnection() ;
+
+			PreparedStatement st = conn.prepareStatement(sql) ;
+			
+			List<Integer> list = new ArrayList<>() ;
+			
+			ResultSet res = st.executeQuery() ;
+			
+			while(res.next()) {
+				try {
+					Integer i =(res.getDate("reported_date").toLocalDate().getYear());
+					if(!list.contains(i)){
+						list.add(i);
+					}
+					
+				} catch (Throwable t) {
+					t.printStackTrace();
+					
+				}
+			}
+			
+			conn.close();
+			return list ;
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null ;
+		}
+	}
 }
